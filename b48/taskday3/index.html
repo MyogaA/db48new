@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>taskday3</title>
+</head>
+<style>
+    .navbar {
+        background-color: gray;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 20px;
+        text-decoration: none;
+    }
+
+    li img {
+        width: 100px;
+    }
+
+    li a:hover:not(.active) {
+        background-color: orangered;
+        border-radius: 10px;
+    }
+
+    .contact {
+        background-color: orangered;
+        color: white;
+        width: 120px;
+        height: 30px;
+        margin-top: 10px;
+        border-radius: 5px;
+        margin-right: 50px;
+    }
+
+    .container {
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        resize: vertical;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 10);
+    }
+
+    .form-group textarea {
+        height: 100px;
+    }
+
+    .submit-btn {
+        float: right;
+        background-color: black;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 10);
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+    }
+</style>
+
+<body style="background-color: lightgray; margin: 0;">
+    <div class="navbar">
+        <ul>
+            <li><img style="width: 40px; padding: 0 50px ; padding-top: 10px;" src="logo.png" href="#home"></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#contact">My project</a></li>
+            <button class="contact" style="border-style: none; float: right;"><a style="text-align: center; text-decoration: none; color: white;" href="contact.html"> contact me</a></button>
+        </ul>
+    </div>
+    <div class="container">
+        <h1 style="text-align: center;">Get In Touch</h1>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required oninput="this.style.borderColor = '';">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required oninput="this.style.borderColor = '';">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="number" id="phone" name="phone" required oninput="this.style.borderColor = '';">
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject:</label>
+                <select style="width: 418px;" id="subject" name="subject" required oninput="this.style.borderColor = '';">
+                    <option value=""></option>
+                    <option>Frontend Developer</option>
+                    <option>Backend Developer</option>
+                    <option>Fullstack Developer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message:</label>
+                <textarea id="message" name="message" required oninput="this.style.borderColor = '';"></textarea>
+            </div>
+            <button type="button" id="button" onclick="validate()" class="submit-btn">Submit</button>
+        </form>
+    </div>
+    <script src="index.js" ></script>
+</body>
+</html>

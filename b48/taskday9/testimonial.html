@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/testimonial.css">
+</head>
+
+<body style="background-color: whitesmoke; margin: 0;">
+  <div class="navbar">
+    <div class="toggle-button">
+      <img style="width: 40px; padding: 0 50px ; padding-top: 10px;" src="./img/logo.png" href="#home">
+      <div>
+      <i class="fas fa-bars"></i>
+      </div>
+    </div>
+    <ul class="navbar-menu">
+      <li><img style="width: 40px; padding: 0 50px ; padding-top: 10px;" src="./img/logo.png" href="#home"></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="myproject.html">My project</a></li>
+      <li><a href="testimonial.html">Testimonial</a></li>
+      <button class="contact" style="border-style: none; float: right;"><a
+          style="text-align: center; text-decoration: none; color: white;" href="contact.html"> contact
+          me</a></button>
+    </ul>
+  </div>
+
+  <div class="navbar-toggle">
+    <ul class="humberger-nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="myproject.html">My project</a></li>
+      <li><a href="Testimonial.html">Testimonial</a></li>
+      <li><button href="contact.html"> contact me</button></li>
+    </ul>
+  </div>
+  <div class="container">
+    <h1>My Testimonial</h1>
+  </div>
+  <div class="testimonial-rating">
+    <h2>Rating Star</h2>
+    <div class="container-btn">
+      <button class="btn-rating" onclick="allcard()">
+       All <i class="fa-solid fa-star"></i>
+      </button>
+      <button class="btn-rating" onclick="filterRating(1)">
+        1<i class="fa-solid fa-star"></i>
+      </button>
+      <button class="btn-rating" onclick="filterRating(2)">
+        2<i class="fa-solid fa-star"></i>
+      </button>
+      <button class="btn-rating" onclick="filterRating(3)">
+        3<i class="fa-solid fa-star"></i>
+      </button>
+      <button class="btn-rating" onclick="filterRating(4)">
+        4<i class="fa-solid fa-star"></i>
+      </button>
+      <button class="btn-rating" onclick="filterRating(5)">
+        5<i class="fa-solid fa-star"></i>
+      </button>
+    </div>
+  </div>
+  <section class="grid-container" id="grid-testi">
+  </section>
+</body>
+<script src="js/ajax.js"></script>
+</html>
