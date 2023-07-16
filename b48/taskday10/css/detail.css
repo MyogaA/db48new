@@ -1,0 +1,45 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.kiri {
+    width: 65%;
+}
+
+.kiri img {
+    width: 130vh;
+    margin-top: 20px;
+    margin-left: 10px;
+    float: right;
+}
+
+.kanan {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+}
+
+.kanan1 {
+    display: flex;
+    flex-direction: column;
+}
+
+.kanan2 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.text-isi {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.text-isi p {
+    text-align: justify;
+    width: 198vh;
+}
