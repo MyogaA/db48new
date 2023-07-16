@@ -5,110 +5,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/contact.css">
     <title>taskday9</title>
 </head>
-<style>
-    .navbar {
-        background-color: gray;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        overflow: hidden;
-    }
-
-    li {
-        float: left;
-    }
-
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 20px;
-        text-decoration: none;
-    }
-
-    li img {
-        width: 100px;
-    }
-
-    li a:hover:not(.active) {
-        background-color: orangered;
-        border-radius: 10px;
-    }
-
-    .contact {
-        background-color: orangered;
-        color: white;
-        width: 120px;
-        height: 30px;
-        margin-top: 10px;
-        border-radius: 5px;
-        margin-right: 50px;
-    }
-
-    .container {
-        width: 400px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-        width: 100%;
-        padding: 8px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        resize: vertical;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 10);
-    }
-
-    .form-group textarea {
-        height: 100px;
-    }
-
-    .submit-btn {
-        float: right;
-        background-color: black;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 10);
-    }
-
-    .submit-btn:hover {
-        background-color: #45a049;
-    }
-</style>
-
-<body style="background-color: lightgray; margin: 0;">
-    <div class="navbar">
-        <ul>
-            <li><img style="width: 40px; padding: 0 50px ; padding-top: 10px;" src="./img/logo.png" href="#home"></li>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="myproject.html">My project</a></li>
-            <li><a href="testimonial.html">Testimonial</a></li>
-            <button class="contact" style="border-style: none; float: right;"><a style="text-align: center; text-decoration: none; color: white;" href="contact.html"> contact me</a></button>
-        </ul>
-    </div>
+<body style="background-color: whitesmoke; margin: 0;">
+    <div class="container-fluid m-0">
+        <div class="row align-items-center">
+          <div class="col">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #E5CDA7;">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#home">
+                  <img src="./img/logo.png" alt="Logo" width="40">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="myproject.html">My Project</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="testimonial.html">Testimonial</a>
+                    </li>
+                  </ul>
+                    <a class="btn btn-outline-primary contact" href="contact.html">Contact Me</a>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
     <div class="container">
-        <h1 style="text-align: center;">Get In Touch</h1>
+        <h1 style="text-align: center; margin-top:20px;">Get In Touch</h1>
         <form action="#" method="POST">
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -124,7 +59,7 @@
             </div>
             <div class="form-group">
                 <label for="subject">Subject:</label>
-                <select style="width: 418px;" id="subject" name="subject" required oninput="this.style.borderColor = '';">
+                <select style="width: 376px;" id="subject" name="subject" required oninput="this.style.borderColor = '';">
                     <option value=""></option>
                     <option>Frontend Developer</option>
                     <option>Backend Developer</option>

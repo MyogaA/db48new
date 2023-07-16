@@ -1,48 +1,6 @@
-* {
-    font-family: "Times New Roman", Times, serif;
-}
 
-.navbar {
-    background-color: gray;
-}
 
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-}
 
-li {
-    float: left;
-}
-
-li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-
-li img {
-    width: 100px;
-}
-
-li a:hover:not(.active) {
-    background-color: orangered;
-    border-radius: 10px;
-}
-
-.contact {
-    background-color: orangered;
-    color: white;
-    width: 120px;
-    height: 30px;
-    margin-top: 10px;
-    border-radius: 5px;
-    margin-right: 50px;
-}
 
 .container {
     display: flex;
