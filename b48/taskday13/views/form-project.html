@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/myproject.css">
+    <link rel="stylesheet" href="/assets/css/form-project.css">
+    <title>My Projects</title>
+</head>
+
+<body style="background-color: whitesmoke;">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #E5CDA7;">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="home">
+                        <img src="/assets/img/logo.png" alt="Logo" width="40">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-primary" href="home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-primary" href="myproject">My Project</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-primary" href="testimonial">Testimonial</a>
+                            </li>
+                        </ul>
+                        <a class="btn btn-outline-primary contact" href="contact">Contact Me</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <section class="section1">
+        <div class="myproject">
+            <div class="container mt-4">
+                <h1>Add myproject</h1>
+                <form style=" background-color: #E5CDA7;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);border-radius: 10px;padding: 10px;" action="/add-project" method="POST">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" >
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea name="content"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <script src="/assets/js/myproject.js"></script>
+</body>
+
+</html>
