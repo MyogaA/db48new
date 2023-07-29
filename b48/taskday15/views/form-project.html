@@ -36,7 +36,17 @@
                                 <a class="nav-link btn btn-outline-primary" href="testimonial">Testimonial</a>
                             </li>
                         </ul>
-                        <a class="btn btn-outline-primary contact" href="contact">Contact Me</a>
+                        <div class="button">
+                            {{ if .IsLoggedIn }}
+                            <form action="/logout" method="post">
+                                <button type="submit" class="btn btn-outline-primary contact">Logout</button>
+                                {{ else }}
+                            <a class="btn btn-outline-primary contact" href="/register">Register</a>
+                            <a class="btn btn-outline-primary contact" href="/login">Login</a>
+                            {{ end }}
+                            <a class="btn btn-outline-primary contact" href="/contact">Contact Me</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </nav>
