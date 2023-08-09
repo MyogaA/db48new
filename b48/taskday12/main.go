@@ -10,13 +10,13 @@ import (
 )
 
 type Project struct {
-	Title    string // title -> unexported, Title -> exported -> bisa diakses di package lain
+	Title    string
 	Content  string
 	Author   string
 	PostDate string
 }
 
-var dataProject = []Project{ // Blog -> struct biasa, []Blog -> slice of struc, mirip array of object
+var dataProject = []Project{
 	{
 		Title:    "Title 1",
 		Content:  "Content 1",
@@ -49,7 +49,7 @@ func main() {
 	e.GET("/edit/:id", edit)
 	e.POST("/update-project/:id", updateProject)
 
-	e.Logger.Fatal(e.Start("localhost:5003"))
+	e.Logger.Fatal(e.Start("localhost:5008"))
 }
 
 func helloWorld(c echo.Context) error {

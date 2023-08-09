@@ -57,7 +57,7 @@ func main() {
 	// e.GET("/edit/:id", edit)
 	// e.POST("/update-project/:id", updateProject)
 
-	e.Logger.Fatal(e.Start("localhost:5004"))
+	e.Logger.Fatal(e.Start("localhost:5007"))
 }
 
 func helloWorld(c echo.Context) error {

@@ -83,7 +83,7 @@ func main() {
 
 	e.Static("/assets", "assets")
 
-	e.Logger.Fatal(e.Start("localhost:5003"))
+	e.Logger.Fatal(e.Start("localhost:5005"))
 }
 
 func helloWorld(c echo.Context) error {
@@ -109,7 +109,6 @@ func home(c echo.Context) error {
 	var dataUser User
 	errQuery := connection.Conn.QueryRow(context.Background(), "SELECT id, name, email, pengalaman, tahun FROM tb_user WHERE id=$1", userId).Scan(&dataUser.Id, &dataUser.Name, &dataUser.Email, &dataUser.Pengalaman, &dataUser.Tahun)
 
-	// id nantinya dapet dari user login
 	if strings.HasSuffix(dataUser.Email, "admin@gmail.com") {
 		dataUser.IsAdmin = true
 	} else {
@@ -124,7 +123,7 @@ func home(c echo.Context) error {
 	dataReponse := map[string]interface{}{
 		"User":       dataUser,
 		"IsAdmin":    dataUser.IsAdmin,
-		"IsLoggedIn": getUserIsLoggedIn(c), // Add the IsLoggedIn value to the template data.
+		"IsLoggedIn": getUserIsLoggedIn(c),
 	}
 	return tmpl.Execute(c.Response(), dataReponse)
 }
@@ -135,7 +134,7 @@ func myproject(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	dataProject, errBlogs := connection.Conn.Query(context.Background(), "SELECT id, name, description, start_date, end_date, image  FROM tb_project")
+	dataProject, errBlogs := connection.Conn.Query(context.Background(), "SELECT id, name, description, start_date, image  FROM tb_project")
 
 	if errBlogs != nil {
 		return c.JSON(http.StatusInternalServerError, errBlogs.Error())
@@ -144,7 +143,7 @@ func myproject(c echo.Context) error {
 	var resultProject []Project
 	for dataProject.Next() {
 		var each = Project{}
-		err := dataProject.Scan(&each.Id, &each.Name, &each.Description, &each.Start_date, &each.End_date, &each.Image)
+		err := dataProject.Scan(&each.Id, &each.Name, &each.Description, &each.Start_date, &each.Image)
 		if err != nil {
 			return c.JSON(http.StatusInternalServerError, err.Error())
 		}
@@ -154,7 +153,7 @@ func myproject(c echo.Context) error {
 	data := map[string]interface{}{
 		"Project":    resultProject,
 		"IsAdmin":    getUserIsAdmin(c),
-		"IsLoggedIn": getUserIsLoggedIn(c), // Add the IsLoggedIn value to the template data.
+		"IsLoggedIn": getUserIsLoggedIn(c),
 	}
 	return tmpl.Execute(c.Response(), data)
 }
@@ -202,7 +201,14 @@ func deleteProject(c echo.Context) error {
 	idToInt, _ := strconv.Atoi(id)
 	fmt.Println("persiapan delete index:", id)
 	connection.Conn.Exec(context.Background(), "DELETE FROM tb_project WHERE id=$1", idToInt)
+	if !getUserIsLoggedIn(c) {
+		return c.Redirect(http.StatusSeeOther, "/login")
+	}
+	isAdmin := getUserIsAdmin(c)
 
+	if !isAdmin {
+		return echo.NewHTTPError(http.StatusForbidden, "Access denied. Only admin can delete projects.")
+	}
 	return c.Redirect(http.StatusMovedPermanently, "/myproject")
 }
 
@@ -221,7 +227,7 @@ func detail(c echo.Context) error {
 	data := map[string]interface{}{
 		"Id":         id,
 		"Project":    detail,
-		"IsLoggedIn": getUserIsLoggedIn(c), // Add the IsLoggedIn value to the template data.
+		"IsLoggedIn": getUserIsLoggedIn(c),
 	}
 	return tmpl.Execute(c.Response(), data)
 }
@@ -240,10 +246,15 @@ func edit(c echo.Context) error {
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
+	isAdmin := getUserIsAdmin(c)
+
+	if !isAdmin {
+		return echo.NewHTTPError(http.StatusForbidden, "Access denied. Only admin can edit projects.")
+	}
 	data := map[string]interface{}{
 		"Id":         id,
 		"Project":    project,
-		"IsLoggedIn": getUserIsLoggedIn(c), // Add the IsLoggedIn value to the template data.
+		"IsLoggedIn": getUserIsLoggedIn(c),
 	}
 	return tmpl.Execute(c.Response(), data)
 }
@@ -278,7 +289,7 @@ func RegisterForm(c echo.Context) error {
 	flash := map[string]interface{}{
 		"FlashMessage": sess.Values["message"],
 		"FlashStatus":  sess.Values["status"],
-		"IsLoggedIn":   getUserIsLoggedIn(c), // Add the IsLoggedIn value to the template data.
+		"IsLoggedIn":   getUserIsLoggedIn(c),
 	}
 
 	delete(sess.Values, "message")
@@ -293,34 +304,29 @@ func register(c echo.Context) error {
 	inputEmail := c.FormValue("inputEmail") // harus valid email
 	inputPassword := c.FormValue("inputPassword")
 
-	// Check if the email already exists in the database
 	var existingEmail string
 	err := connection.Conn.QueryRow(context.Background(), "SELECT email FROM tb_user WHERE email=$1", inputEmail).Scan(&existingEmail)
 	if err == nil {
 		return redirectWithMessage(c, "Email is already registered!", false, "/register")
 	}
 
-	// Check if the combination of name and email already exists in the database
 	var existingName string
 	err = connection.Conn.QueryRow(context.Background(), "SELECT name FROM tb_user WHERE name=$1 AND email=$2", inputName, inputEmail).Scan(&existingName)
 	if err == nil {
 		return redirectWithMessage(c, "Combination of name and email is already registered!", false, "/register")
 	}
 
-	// validasi (trim, validasi valid email)
 	fmt.Println("Register - Name:", inputName, "Email:", inputEmail)
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(inputPassword), 10)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err.Error())
 	}
 
-	// Include the name, email, and hashed password fields in the INSERT INTO query
 	query, err := connection.Conn.Exec(context.Background(), "INSERT INTO tb_user (name, email, password) VALUES($1, $2, $3)", inputName, inputEmail, hashedPassword)
 	if err != nil {
 		return redirectWithMessage(c, "Register failed!", false, "/register")
 	}
 
-	// Check if any rows were affected to verify the registration was successful
 	if query.RowsAffected() == 0 {
 		return redirectWithMessage(c, "Register failed!", false, "/register")
 	}
@@ -342,7 +348,7 @@ func LoginForm(c echo.Context) error {
 	flash := map[string]interface{}{
 		"FlashMessage": sess.Values["message"],
 		"FlashStatus":  sess.Values["status"],
-		"IsLoggedIn":   getUserIsLoggedIn(c), // Add the IsLoggedIn value to the template data.
+		"IsLoggedIn":   getUserIsLoggedIn(c),
 	}
 
 	delete(sess.Values, "message")
@@ -392,7 +398,6 @@ func logout(c echo.Context) error {
 	return c.Redirect(http.StatusSeeOther, "/home")
 }
 
-// Function to check if a user is logged in
 func getUserIsLoggedIn(c echo.Context) bool {
 	sess, _ := session.Get("session", c)
 	isLoggedIn := sess.Values["IsLoggedIn"]
@@ -402,7 +407,6 @@ func getUserIsLoggedIn(c echo.Context) bool {
 	return isLoggedIn.(bool)
 }
 
-// Function to check if a user is an admin
 func getUserIsAdmin(c echo.Context) bool {
 	sess, _ := session.Get("session", c)
 	isAdmin := sess.Values["IsAdmin"]
@@ -412,7 +416,6 @@ func getUserIsAdmin(c echo.Context) bool {
 	return isAdmin.(bool)
 }
 
-// Middleware to check if the user is authenticated (logged in)
 func isAuthenticated() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
@@ -424,11 +427,28 @@ func isAuthenticated() echo.MiddlewareFunc {
 	}
 }
 
-// Function to handle redirects with flash messages
 func redirectWithMessage(c echo.Context, message string, status bool, url string) error {
 	sess, _ := session.Get("session", c)
 	sess.Values["message"] = message
 	sess.Values["status"] = status
 	sess.Save(c.Request(), c.Response())
 	return c.Redirect(http.StatusSeeOther, url)
+}
+
+func isAdmin() echo.MiddlewareFunc {
+	return func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			if !getUserIsLoggedIn(c) {
+				return c.Redirect(http.StatusSeeOther, "/login")
+			}
+
+			isAdmin := getUserIsAdmin(c)
+
+			if !isAdmin {
+				return echo.NewHTTPError(http.StatusForbidden, "Access denied. Only admin can perform this action.")
+			}
+
+			return next(c)
+		}
+	}
 }

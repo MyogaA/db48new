@@ -1,0 +1,248 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.container1 {
+    display: flex;
+    flex-direction: column;
+    background-color: #E5CDA7;
+    box-shadow: 0 0 50px;
+    border-radius: 10px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    padding: 2px;
+}
+
+.content h2 {
+    margin-left: 40px;
+}
+
+.buttoncv button {
+    border-radius: 20px;
+    background-color: #032A3B;
+    margin-left: 40px;
+    width: 20%;
+    height: 30px;
+}
+
+.content p {
+    width: 400px;
+    padding-left: 42px;
+    text-align: justify;
+    color: #032A3B;
+}
+
+.cv {
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.buttoncv {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.link {
+    display: flex;
+    margin-left: 40px;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.link a {
+    font-size: 25px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    color: white;
+    background-color: #032A3B;
+    margin-bottom: 20px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: #E5CDA7;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    height: 400px;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 5px;
+    height: 300px;
+}
+
+.kiri {
+    display: flex;
+    flex-direction: column;
+}
+
+.kanan {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 280px;
+}
+
+
+/* Mobile  */
+@media screen and (max-width: 600px) {
+    li img {
+        width: 100%;
+    }
+
+    .container1 {
+        flex-direction: column-reverse;
+    }
+
+    .kiri,
+    .kanan {
+        margin: 0;
+        width: 100%;
+        display: flex;
+    }
+
+    .content {
+        padding: 10px;
+    }
+
+    .content p {
+        width: 90%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .navbar-menu {
+        display: none;
+    }
+
+    .humberger-nav {
+        display: none;
+    }
+
+    .navbar-toggle {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .toggle-button {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        height: 60px;
+        cursor: pointer;
+    }
+
+    .toggle-button img {
+        margin-bottom: 8px;
+    }
+
+    .toggle-button i {
+        margin-right: 20px;
+    }
+
+    .humberger-nav.expanded {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #E5CDA7;
+        width: 100%;
+    }
+
+    .humberger-nav.expanded li {
+        width: 100%;
+        align-items: center;
+    }
+
+    .humberger-nav.expanded a {
+        text-align: center;
+        color: white;
+        border: solid 2px white;
+    }
+
+    .humberger-nav.expanded li button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-color: #E5CDA7;
+        color: white;
+        border: solid 2px white;
+        height: 50px;
+    }
+
+    .humberger-nav li button:hover {
+        background-color: #032A3B;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        padding: 5px;
+    }
+}
+
+/* Tablet  */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .container1 {
+        flex-direction: row;
+        height: auto;
+    }
+
+    .kiri,
+    .kanan {
+        margin: 20px;
+    }
+
+
+    .content p {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .humberger-nav {
+        display: none;
+    }
+
+    .toggle-button {
+        display: none;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        padding: 10px;
+    }
+}
+
+/* Laptop  */
+@media screen and (min-width: 1025px) {
+    .container1 {
+        flex-direction: row;
+        height: auto;
+    }
+
+    .toggle-button {
+        display: none;
+    }
+
+    .humberger-nav {
+        display: none;
+    }
+}
